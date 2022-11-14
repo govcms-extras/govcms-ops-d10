@@ -5,7 +5,7 @@
 ### Build the project
 
 ```bash
-git@github.com:govCMS/govcms-ops-d10.git
+git clone git@github.com:govCMS/govcms-ops-d10.git
 cd govcms-ops-d10
 ahoy build
 ahoy up

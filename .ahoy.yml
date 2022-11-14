@@ -36,6 +36,6 @@ commands:
     usage: Run PHPUnit tests.
     cmd: docker compose exec drupal vendor/bin/phpunit "$@"
 
-  composer:
-    usage: Anything here.
-    cmd: docker composer exec drupal composer validate
+  drupal-check:
+    usage: Static analysis tool to check for correctness and deprecation errors.
+    cmd: docker compose exec drupal vendor/bin/drupal-check "$@"

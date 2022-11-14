@@ -10,7 +10,7 @@ services:
       - 8888:80
     volumes:
       - ./modules:/var/www/html/modules
-      - ./sites:/var/www/html/sites
+      - ./sites/deafult/files:/var/www/html/sites/default/files
       - ./themes:/var/www/html/themes
 
   ##########################################

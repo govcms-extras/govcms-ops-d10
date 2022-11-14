@@ -1,0 +1,31 @@
+services:
+  ##########################################
+  # drupal: The drupal site used by local
+  ##########################################
+  drupal:
+    build: 
+      context: .
+      dockerfile: $PWD/Dockerfile.drupal
+    ports:
+      - 8888:80
+    volumes:
+      - ./modules:/var/www/html/modules
+      - ./sites:/var/www/html/sites
+      - ./themes:/var/www/html/themes
+
+  ##########################################
+  # mariadb: The database used by local
+  ##########################################
+  mariadb:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: drupal
+      MARIADB_USER: drupal
+      MARIADB_PASSWORD: drupal
+    volumes:
+      - ./database:/var/lib/mysql
+
+networks:
+  default:
+    external: false

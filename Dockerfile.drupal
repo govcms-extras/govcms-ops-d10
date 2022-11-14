@@ -1,0 +1,30 @@
+FROM drupal:10.0.0-beta2-php8.1
+
+RUN apt-get update && \
+    apt-get install -q -y libicu-dev mariadb-client git unzip rsync nano && \
+    apt-get autoclean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    docker-php-ext-configure intl && \
+    docker-php-ext-install intl
+
+# Set timezone to Australia/Sydney by default
+RUN ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
+
+RUN echo "memory_limit = 512M" >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini && \
+    echo "upload_max_filesize = 100M" >> /usr/local/etc/php/conf.d/docker-php-upload-limit.ini
+
+WORKDIR /opt/drupal
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_MEMORY_LIMIT=-1
+ENV SIMPLETEST_BASE_URL="http://localhost"
+ENV SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
+
+# Set the Github OAuth token only when the variable is set.
+RUN [ ! -z "$GITHUB_TOKEN" ] && \
+    composer config -g github-oauth.github.com $GITHUB_TOKEN || \
+    echo "Personal Github OAuth token is not set."
+
+RUN composer require drush/drush:~11 palantirnet/drupal-rector drupal/core-dev:10.0.0-beta2 --dev --update-with-all-dependencies && \
+    cp vendor/palantirnet/drupal-rector/rector.php .

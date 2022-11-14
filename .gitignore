@@ -1,0 +1,25 @@
+# Ignore local variables.
+.env
+
+# Ignore local folders.
+database/
+modules/
+sites/
+themes/
+
+# Composer vendor
+composer.lock
+vendor/
+vendor/.git
+
+# PHPStorm
+.idea/
+atlassian-ide-plugin.xml
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# .lock files
+*.lock

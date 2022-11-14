@@ -12,7 +12,8 @@ RUN apt-get update && \
 RUN ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 
 RUN echo "memory_limit = 512M" >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini && \
-    echo "upload_max_filesize = 100M" >> /usr/local/etc/php/conf.d/docker-php-upload-limit.ini
+    echo "upload_max_filesize = 100M" >> /usr/local/etc/php/conf.d/docker-php-upload-limit.ini && \
+    echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/docker-php-upload-limit.ini
 
 WORKDIR /opt/drupal
 

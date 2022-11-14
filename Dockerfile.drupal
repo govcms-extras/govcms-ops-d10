@@ -31,5 +31,6 @@ RUN composer require drush/drush:~11 \
                      palantirnet/drupal-rector \
                      drupal/core-dev:10.0.0-beta2 \
                      --dev --update-with-all-dependencies && \
+    composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer 1 && \
     composer global require drupal/coder && \
     cp vendor/palantirnet/drupal-rector/rector.php .

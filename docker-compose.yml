@@ -1,17 +1,43 @@
 services:
   ##########################################
+  # govcms: The GovCMS drupal 10 site used by local PoC
+  ##########################################
+  govcms:
+    build: 
+      context: .
+      dockerfile: $PWD/Dockerfile.govcms
+      secrets:
+       - github_token
+    ports:
+      - 8888:80
+    volumes:
+      - ./modules/govcms:/var/www/html/modules
+      - ./sites/govcms:/var/www/html/sites
+      - ./themes/govcms:/var/www/html/themes
+    environment:
+      GITHUB_TOKEN: /run/secrets/github_token
+    secrets:
+       - github_token
+
+  ##########################################
   # drupal: The drupal site used by local
   ##########################################
   drupal:
     build: 
       context: .
       dockerfile: $PWD/Dockerfile.drupal
+      secrets:
+       - github_token
     ports:
-      - 8888:80
+      - 8889:80
     volumes:
-      - ./modules:/var/www/html/modules
-      - ./sites:/var/www/html/sites
-      - ./themes:/var/www/html/themes
+      - ./modules/drupal10:/var/www/html/modules
+      - ./sites/drupal10:/var/www/html/sites
+      - ./themes/drupal10:/var/www/html/themes
+    environment:
+      GITHUB_TOKEN: /run/secrets/github_token
+    secrets:
+       - github_token
 
   ##########################################
   # drupal9: The drupal site used by local
@@ -21,11 +47,11 @@ services:
       context: .
       dockerfile: $PWD/Dockerfile.drupal9
     ports:
-      - 9999:80
+      - 8890:80
     volumes:
-      - ./modules:/var/www/html/modules
-      - ./sites:/var/www/html/sites
-      - ./themes:/var/www/html/themes
+      - ./modules/drupal9:/var/www/html/modules
+      - ./sites/drupal9:/var/www/html/sites
+      - ./themes/drupal9:/var/www/html/themes
 
   ##########################################
   # mariadb: The database used by local
@@ -39,6 +65,10 @@ services:
       MARIADB_PASSWORD: drupal
     volumes:
       - ./database:/var/lib/mysql
+
+secrets:
+   github_token:
+     file: ./configs/auth.json
 
 networks:
   default:

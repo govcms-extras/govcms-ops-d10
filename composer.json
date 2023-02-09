@@ -1,0 +1,101 @@
+{
+    "name": "govcms/govcms-project",
+    "description": "Project template for GovCMS Drupal Distribution",
+    "keywords": ["GovCMS"],
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.govcms.gov.au",
+    "support": {
+        "issues:": "https://github.com/GovCMS/GovCMS/issues",
+        "wik": "https://github.com/GovCMS/GovCMS/wiki",
+        "source": "https://github.com/GovCMS/GovCMS/releases"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "drupal/bartik": "^1.0",
+        "drupal/ckeditor": "^1.0",
+        "drupal/components": "3.0.0-beta3 as 2.4.0",
+        "drupal/config_split": "2.0.0-rc4 as 1.5.0",
+        "drupal/contact_storage": "1.3.0 as 1.2.0",
+        "drupal/core-composer-scaffold": "10.0.3 as 9.4.11",
+        "drupal/core-recommended": "10.0.3 as 9.4.11",
+        "drupal/dynamic_entity_reference": "4.0.0-alpha2 as 1.16.0",
+        "drupal/focal_point": "2.0.0-alpha2 as 1.5.0",
+        "drupal/minisite": "2.0.0 as 1.3.0",
+        "drupal/scheduled_transitions": "2.3.0 as 2.2.1",
+        "drupal/simple_oauth": "6.0.0-beta3 as 5.2.3",
+        "drupal/swiftmailer": "2.4.0 as 2.2.0",
+        "drupal/tfa": "2.0.0-alpha2 as 1.0.0",
+        "drupal/video_embed_field": "2.5.0 as 2.4.0",
+        "drupal/webform": "6.2.0-beta5 as 6.1.4",
+        "govcms/govcms": "dev-2.x-develop"
+    },
+    "require-dev": {
+        "drush/drush": "^11.2",
+        "palantirnet/drupal-rector": "^0.15"
+    },
+    "replace": {
+        "dropzone/dropzone": "*",
+        "drupal/securitytxt": "*",
+        "drupal/linkit": "*",
+        "drupal/entity_embed": "*",
+        "drupal/context": "*",
+        "drupal/features": "*",
+        "drupal/bigmenu": "*",
+        "drupal/panelizer": "*",
+        "drupal/linked_field": "*",
+        "drupal/config_ignore": "*",
+        "drupal/config_update": "*",
+        "drupal/config_perms": "*",
+        "drupal/block_place": "*",
+        "drupal/adminimal_theme": "*",
+        "drupal/adminimal_admin_toolbar": "*"
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "drush/contrib/{$name}": ["type:drupal-drush"]
+        },
+        "enable-patching": true,
+        "patches-ignore": {
+            "govcms/govcms": {
+                "drupal/tfa": {
+                    "This patch has known conflict with D10": "https://www.drupal.org/files/issues/2022-10-26/tfa-2930541-48_3.patch",
+                    "This TFA patch has known conflict with D10": "https://git.drupalcode.org/project/tfa/-/commit/4e4da3e.patch"
+                }
+            }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "oomphinc/composer-installers-extender": true
+        },
+        "bin-dir": "bin/",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "nuke": "rm -r -f bin vendor composer.lock web"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

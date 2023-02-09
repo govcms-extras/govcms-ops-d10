@@ -22,19 +22,14 @@ ENV COMPOSER_MEMORY_LIMIT=-1
 ENV SIMPLETEST_BASE_URL="http://localhost"
 ENV SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
 
-# Set the Github OAuth token only when the variable is set.
-RUN [ ! -z "$GITHUB_TOKEN" ] && \
-    composer config -g github-oauth.github.com $GITHUB_TOKEN || \
-    echo "Personal Github OAuth token is not set."
 
 RUN composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer 1 && \
     composer global require drupal/coder && \
     composer config minimum-stability dev && \
-    composer require drupal/core-recommended:9.5.0-beta2 --with-all-dependencies && \
     composer require drush/drush:~11 \
                      mglaman/drupal-check \
                      palantirnet/drupal-rector \
-                     drupal/core-dev:9.5.0-beta2 \
+                     drupal/core-dev \
                      phpspec/prophecy-phpunit:^2 \
                      --dev --update-with-all-dependencies && \
     cp vendor/palantirnet/drupal-rector/rector.php .

@@ -1,0 +1,5 @@
+name: Events Log Track Config
+description: 'Logs configuration changes'
+type: module
+core_version_requirement: ^9 || ^10
+package: Statistics

@@ -54,7 +54,8 @@
         "drupal/config_perms": "*",
         "drupal/block_place": "*",
         "drupal/adminimal_theme": "*",
-        "drupal/adminimal_admin_toolbar": "*"
+        "drupal/adminimal_admin_toolbar": "*",
+        "drupal/event_log_track": "*"
     },
     "extra": {
         "drupal-scaffold": {

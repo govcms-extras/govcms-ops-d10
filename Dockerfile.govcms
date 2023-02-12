@@ -30,3 +30,7 @@ WORKDIR /app
 COPY ./composer.json /app/
 
 RUN --mount=type=secret,id=github_token,dst=/app/auth.json composer update -d /app
+
+RUN set -eux; \
+    rm -rf /app/web/profiles/govcms/config; \
+    sed -i -e "/core_version_requirement/ s!9!10!" /app/web/profiles/govcms/govcms.info.yml;

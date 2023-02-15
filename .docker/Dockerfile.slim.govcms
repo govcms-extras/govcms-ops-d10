@@ -1,0 +1,30 @@
+FROM drupal:10-php8.1
+
+# Set timezone to Australia/Sydney by default
+RUN ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
+
+RUN { \
+		echo 'memory_limit = 512M'; \
+		echo 'upload_max_filesize = 100M'; \
+		echo 'post_max_size = 100M'; \
+	} > /usr/local/etc/php/conf.d/govcms-custom.ini
+
+WORKDIR /app
+
+COPY ./composer.json /app/
+
+RUN --mount=type=secret,id=github_token,dst=/app/auth.json composer update
+
+RUN set -eux; \
+    chown -R www-data:www-data web/sites web/modules web/themes; \
+    rm -rf /opt/drupal; \
+    ln -sf /app/web /var/www/html; \
+    rm -rf /app/web/profiles/govcms/config; \
+    sed -i -e "/core_version_requirement/ s!9!10!" /app/web/profiles/govcms/govcms.info.yml; \
+    sed -i -e "132, 146d" /app/web/profiles/govcms/govcms.install; \
+    # delete composer cache.
+    rm -rf ~/.composer;
+
+COPY ./modules/govcms /app/web/modules/govcms
+
+ENV PATH=${PATH}:/app/bin

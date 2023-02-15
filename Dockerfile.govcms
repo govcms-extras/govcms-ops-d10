@@ -20,17 +20,18 @@ ENV COMPOSER_MEMORY_LIMIT=-1
 ENV SIMPLETEST_BASE_URL="http://localhost"
 ENV SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
 
-RUN set -eux; \
-    mv /opt/drupal /app; \
-    ln -sf /app/web /var/www/html; \
-    rm -rf /app;
-
 WORKDIR /app
 
 COPY ./composer.json /app/
 
-RUN --mount=type=secret,id=github_token,dst=/app/auth.json composer update -d /app
+RUN --mount=type=secret,id=github_token,dst=/app/auth.json composer update
 
 RUN set -eux; \
+    chown -R www-data:www-data web/sites web/modules web/themes; \
+    cp -r /opt/drupal/web/sites /app/web/sites; \
+    rm -rf /opt/drupal; \
+    ln -sf /app/web /var/www/html; \
     rm -rf /app/web/profiles/govcms/config; \
     sed -i -e "/core_version_requirement/ s!9!10!" /app/web/profiles/govcms/govcms.info.yml;
+
+ENV PATH=${PATH}:/app/bin

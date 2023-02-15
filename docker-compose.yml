@@ -11,9 +11,9 @@ services:
     ports:
       - 8888:80
     volumes:
-      - ./modules/govcms:/var/www/html/modules/develop
-      - ./sites/govcms:/var/www/html/sites
-      - ./themes/govcms:/var/www/html/themes/develop
+      - /var/www/html/sites
+      - ./modules/govcms:/app/web/modules/develop
+      - ./themes/govcms:/app/web/themes/develop
     environment:
       GITHUB_TOKEN: /run/secrets/github_token
     secrets:
@@ -31,8 +31,8 @@ services:
     ports:
       - 8889:80
     volumes:
+      - /var/www/html/sites
       - ./modules/drupal10:/var/www/html/modules/develop
-      - ./sites/drupal10:/var/www/html/sites
       - ./themes/drupal10:/var/www/html/themes/develop
     environment:
       GITHUB_TOKEN: /run/secrets/github_token
@@ -49,8 +49,8 @@ services:
     ports:
       - 8890:80
     volumes:
+      - /var/www/html/sites
       - ./modules/drupal9:/var/www/html/modules/develop
-      - ./sites/drupal9:/var/www/html/sites
       - ./themes/drupal9:/var/www/html/themes/develop
 
   ##########################################

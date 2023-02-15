@@ -18,7 +18,7 @@ Then you can visit http://localhost:8888/
 ### Fast preview
 
 ```bash
-docker run --name govcms-d10-test -p 8080:80 -d govcmspoc/govcms:latest
+docker run --name govcms-d10-test -p 8080:80 -d govcmspoc/govcms:drupal10
 ```
 
 More examples can be found in USAGE.md

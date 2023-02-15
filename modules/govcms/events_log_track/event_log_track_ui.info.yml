@@ -1,0 +1,5 @@
+name: Events Log Track UI
+description: 'Display UI for viewing event logs.'
+type: module
+core_version_requirement: ^9 || ^10
+package: Statistics

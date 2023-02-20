@@ -1,5 +1,0 @@
-name: Events Log Track Syslog
-description: 'Integrate ELT with Syslog.'
-type: module
-core_version_requirement: ^9 || ^10
-package: Statistics

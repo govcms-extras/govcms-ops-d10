@@ -36,6 +36,7 @@
         "drupal/tfa": "2.0.0-alpha2 as 1.0.0",
         "drupal/video_embed_field": "2.5.0 as 2.4.0",
         "drupal/webform": "6.2.0-beta5 as 6.1.4",
+        "govcms-assets/dropzone": "5.7.2",
         "govcms/govcms": "dev-2.x-develop"
     },
     "require-dev": {

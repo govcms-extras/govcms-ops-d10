@@ -12,8 +12,9 @@ services:
       - 8888:80
     volumes:
       - /var/www/html/sites
-      - ./modules/govcms:/app/web/modules/develop
-      - ./themes/govcms:/app/web/themes/develop
+      - ./sites/govcms/modules:/app/web/modules/develop
+      - ./sites/govcms/themes:/app/web/themes/develop
+      - ./sites/govcms/config:/app/web/profiles/govcms/config
     environment:
       GITHUB_TOKEN: /run/secrets/github_token
     secrets:
@@ -32,8 +33,8 @@ services:
       - 8889:80
     volumes:
       - /var/www/html/sites
-      - ./modules/drupal10:/var/www/html/modules/develop
-      - ./themes/drupal10:/var/www/html/themes/develop
+      - ./sites/drupal10/modules:/var/www/html/modules/develop
+      - ./sites/drupal10/themes:/var/www/html/themes/develop
     environment:
       GITHUB_TOKEN: /run/secrets/github_token
     secrets:
@@ -50,8 +51,8 @@ services:
       - 8890:80
     volumes:
       - /var/www/html/sites
-      - ./modules/drupal9:/var/www/html/modules/develop
-      - ./themes/drupal9:/var/www/html/themes/develop
+      - ./sites/drupal9/modules:/var/www/html/modules/develop
+      - ./sites/drupal9/themes:/var/www/html/themes/develop
 
   ##########################################
   # mariadb: The database used by local

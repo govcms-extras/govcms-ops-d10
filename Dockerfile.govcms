@@ -34,6 +34,7 @@ RUN set -eux; \
     sed -i -e "/core_version_requirement/ s!9!10!" /app/web/profiles/govcms/govcms.info.yml; \
     sed -i -e "132, 146d" /app/web/profiles/govcms/govcms.install;
 
+COPY ./sites/govcms/config /app/web/profiles/govcms/config
 COPY ./modules/govcms /app/web/modules/govcms
 
 ENV PATH=${PATH}:/app/bin

@@ -42,7 +42,6 @@
     "replace": {
         "dropzone/dropzone": "*",
         "drupal/securitytxt": "*",
-        "drupal/linkit": "*",
         "drupal/entity_embed": "*",
         "drupal/features": "*",
         "drupal/bigmenu": "*",
